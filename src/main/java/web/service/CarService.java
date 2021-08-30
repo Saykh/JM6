@@ -1,6 +1,7 @@
 package web.service;
 
 import org.springframework.stereotype.Component;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.model.Car;
 
@@ -25,7 +26,11 @@ public class CarService {
         return carList;
     }
 
-    public List<Car> getCarsOfCount(@RequestParam(value = "count", required = false) Integer integer) {
-        return carList.stream().limit(integer).collect(Collectors.toList());
+    public List<Car> getCarsOfCount(List <Car> carList, Integer integer) {
+        if (integer == null || integer >= 5) {
+            return carList;
+        } else {
+            return carList.stream().limit(integer).collect(Collectors.toList());
+        }
     }
 }
